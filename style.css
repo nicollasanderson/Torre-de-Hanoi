@@ -27,6 +27,7 @@ body{
     font-size: 25px;
     padding: 10px;
     z-index: 2;
+    text-align: center;
 }
 .textoContador{
     font-size: 18px;
@@ -44,9 +45,9 @@ body{
     margin-top: 30px;
 }
 button{
-    width: 150px;
+    width: 85px;
     height: 50px;
-    margin: 50px;
+    margin: 15px 0;
     cursor: pointer;
     font-size: 16pt;
     font-weight: 800;
@@ -58,41 +59,41 @@ button{
     align-items: center;
     flex-flow:column-reverse;
     background-color: black;
-    height: 150px;
+    height: 180px;
     width: 10px;
     margin: 0 15%;
     border-radius: 10px;
 }
 #disc01{
-    width: 150px;
+    width: 100px;
     height: 25px;
     background-color: blue;
     border: 2px solid;
     border-radius: 10px;
 }
 #disc02{
-    width: 120px;
+    width: 80px;
     height: 25px;
     background-color: green;
     border: 2px solid;
     border-radius: 10px;
 }
 #disc03{
-    width: 90px;
+    width: 60px;
     height: 25px;
     background-color: yellow;
     border: 2px solid;
     border-radius: 10px;
 }
 #disc04{
-    width: 60px;
+    width: 40px;
     height: 25px;
     background-color: orange;
     border: 2px solid;
     border-radius: 10px;
 }
 #disc05{
-    width: 30px;
+    width: 20px;
     height: 25px;
     background-color: #ffffff;
     border: 2px solid;
@@ -100,8 +101,10 @@ button{
 }
 #ux{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 
@@ -111,8 +114,23 @@ button{
         align-items: center;
         flex-flow:column-reverse;
         background-color: black;
-        height: 150px;
+        height: 200px;
         width: 10px;
+    }
+    #ux{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button{
+        width: 150px;
+        height: 50px;
+        margin: 50px;
+        cursor: pointer;
+        font-size: 16pt;
+        font-weight: 800;
+        color: #ffffff;
+        background-color: black;
     }
     #disc01{
         width: 200px;

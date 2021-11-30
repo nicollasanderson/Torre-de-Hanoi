@@ -173,7 +173,6 @@ function moveDisc(disc) {
         }        
 }
 
-let cont = 0
 //FUNÇÃO PARA COLOCAR OS DISCOS
 function putDisc(newTower, tower) {
     const delElement = tower.lastElementChild;
@@ -221,6 +220,7 @@ function condicaoVitoria(){
 }
 
 //ADICIONA UMA INFORMAÇÃO NA TELA E ESPERA 5 SEGUNDOS ANTES DE SER REMOVIDO
+let cont = 0
 function tempoDoTexto(texto){
     let textInfos = document.getElementsByClassName('textoInfos')[0]
     textInfos.innerText = texto
