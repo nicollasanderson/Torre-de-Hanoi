@@ -1,5 +1,6 @@
-//VARIÁVEL PARA ARMAZENAR A CONTAGEM DE MOVIMENTOS
 
+
+//VARIÁVEL PARA ARMAZENAR A CONTAGEM DE MOVIMENTOS
 let contador = 0;
 let textContador = document.getElementById('contador')
 
@@ -77,9 +78,9 @@ function reset() {
     contador = 0;
     textContador.innerText = contador
     
+    tower01.addEventListener("click", userClick);
     tower02.addEventListener("click", userClick);
     tower03.addEventListener("click", userClick);
-    tower01.addEventListener("click", userClick);
 
     //CHAMA A FUNÇÃO PARA CRIAR OS DISCOS E COLOCÁ-LOS NA TORRE 1
     createDiscs();
@@ -99,17 +100,16 @@ const tower02 = document.getElementById("tower02");
 const tower03 = document.getElementById("tower03");
 
 //COLOCA HANDLE NAS 3 TORRES
+tower01.addEventListener("click", userClick);
 tower02.addEventListener("click", userClick);
 tower03.addEventListener("click", userClick);
-tower01.addEventListener("click", userClick);
+
 
 //VARIÁVEL PARA ARMAZENAR O CLIQUE DO USUÁRIO
 let clicked = false;
 
 //VARIÁVEL PARA ARMAZENAR O VALOR DA TORRE DO PRIMEIRO CLIQUE
 let tower;
-
-
 
 //FUNÇÃO PARA DETERMINAR QUAL TAREFA DEVE SER REALIZADA
 function userClick(e){
@@ -174,10 +174,14 @@ function putDisc(newTower, tower) {
 function condicaoVitoria(){
     console.log(tower03.childElementCount)
     if (tower03.childElementCount >= 4 || tower02.childElementCount >= 4) {
-        alert("Parabéns, você ganhou!")
+        tower01.removeEventListener("click", userClick);   
         tower02.removeEventListener("click", userClick);
         tower03.removeEventListener("click", userClick);
-        tower01.removeEventListener("click", userClick);
-        
+        if (confirm ("Parabéns, você ganhou! Deseja jogar novamente?")){
+            alert("Vamos lá");
+            reset();
+            } else {
+                alert("Que pena!");   
+        }
     }
 }
