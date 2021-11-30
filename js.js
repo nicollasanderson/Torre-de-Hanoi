@@ -1,3 +1,8 @@
+//VARIÁVEL PARA ARMAZENAR A CONTAGEM DE MOVIMENTOS
+
+let contador = 0;
+let textContador = document.getElementById('contador')
+
 //FUNÇÃO PARA CRIAR AS TORRES
 function createTowers() {
 
@@ -68,6 +73,14 @@ function reset() {
             tower03.removeChild(tower03.firstChild);
         }
 
+    //RESETA O CONTADOR
+    contador = 0;
+    textContador.innerText = contador
+    
+    tower02.addEventListener("click", userClick);
+    tower03.addEventListener("click", userClick);
+    tower01.addEventListener("click", userClick);
+
     //CHAMA A FUNÇÃO PARA CRIAR OS DISCOS E COLOCÁ-LOS NA TORRE 1
     createDiscs();
 }
@@ -96,6 +109,8 @@ let clicked = false;
 //VARIÁVEL PARA ARMAZENAR O VALOR DA TORRE DO PRIMEIRO CLIQUE
 let tower;
 
+
+
 //FUNÇÃO PARA DETERMINAR QUAL TAREFA DEVE SER REALIZADA
 function userClick(e){
     let catchTower = e.currentTarget;
@@ -103,12 +118,13 @@ function userClick(e){
         moveDisc(catchTower);
     } else if (clicked == true) {
         putDisc(catchTower, tower);
+        condicaoVitoria()
     }
 }
 //FUNÇÃO PARA SELECIONAR O DISCO A SER RETIRADO COM HANDLER DE CLIQUE EM CADA TORRE
 function moveDisc(disc) {
     const delElement = disc.lastElementChild;
-
+    
     //PRIMEIRO VERIFICA SE A TORRE TEM DISCOS
     if (disc.childElementCount == 0) {
         alert("Selecione uma torre com discos.");}
@@ -116,6 +132,7 @@ function moveDisc(disc) {
         //TENDO DISCOS, REMOVE-SE O ÚLTIMO
         else if (disc.childElementCount > 0) {
         //delElement.remove();
+        delElement.style.border = '2px solid red'
         tower = disc;
         clicked = true;
         }        
@@ -124,15 +141,18 @@ function moveDisc(disc) {
 //FUNÇÃO PARA COLOCAR OS DISCOS
 function putDisc(newTower, tower) {
     const delElement = tower.lastElementChild;
-
+    delElement.style.border = '2px solid black'
+    
     //VERIFICA SE É A MESMA TORRE
     if (newTower == tower){
         alert("Escolha outra torre.")
+        delElement.style.border = '2px solid red'
     } else if (newTower != tower) {
-
         //VERIFICA SE A TORRE DE DESTINO TEM DISCO
         if (newTower.childElementCount == 0) {
             newTower.appendChild(delElement);
+            contador++
+            textContador.innerText = contador
             }
             //VERIFICA A COMPATIBILIDADE DA LARGURA DO DISCO
             else if (newTower.childElementCount > 0) {
@@ -141,19 +161,23 @@ function putDisc(newTower, tower) {
                 const width = delElement.clientWidth;
                 if (restWidth > width){
                     newTower.appendChild(delElement);
+                    contador++
+                    textContador.innerText = contador
                 } else if (width > restWidth){
                     alert("Largura inválida. Observe as regras.")
                 }
             } clicked = false;
     }
-} 
+}
 
-//CONDIÇÃO DE VITÓRIA - TORRE 3 COM 4 DISCOS.   
-if (tower03.length == 4) {
-    if (confirm("Parabéns, você ganhou! Deseja jogar novamente?")) {
-            alert("Vamos lá");
-            reset();
-            } else {
-            alert("Que pena!");
-            }
+//CONDIÇÃO DE VITÓRIA - TORRE 3 OU TORRE 2 COM 4 DISCOS.
+function condicaoVitoria(){
+    console.log(tower03.childElementCount)
+    if (tower03.childElementCount >= 4 || tower02.childElementCount >= 4) {
+        alert("Parabéns, você ganhou!")
+        tower02.removeEventListener("click", userClick);
+        tower03.removeEventListener("click", userClick);
+        tower01.removeEventListener("click", userClick);
+        
     }
+}
