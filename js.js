@@ -50,33 +50,31 @@ function createDiscs(){
 //FUNÇÃO PARA RESETAR O JOGO, COLOCANDO-OS NA TORRE 1.
 function reset() {
     
-    //BUSCA AS TORRES
+    //BUSCA A TORRE 1 E REMOVE TODOS FILHOS
     const tower01 = document.getElementById("tower01");
+        while (tower01.firstChild) {
+            tower01.removeChild(tower01.firstChild);
+        }
 
-    //REMOVE TODOS OS FILHOS DA TORRE 2
+    //BUSCA A TORRE 2 E REMOVE TODOS FILHOS
     const tower02 = document.getElementById("tower02");
         while (tower02.firstChild) {
             tower02.removeChild(tower02.firstChild);
         }
     
-    //REMOVE TODOS OS FILHOS DA TORRE 3    
+    //BUSCA A TORRE 3 E REMOVE TODOS FILHOS   
     const tower03 = document.getElementById("tower03");
         while (tower03.firstChild) {
             tower03.removeChild(tower03.firstChild);
         }
 
-    //BUSCA OS DISCOS    
-    const disc01 = document.getElementById("disc01");
-    const disc02 = document.getElementById("disc02");
-    const disc03 = document.getElementById("disc03");
-    const disc04 = document.getElementById("disc04");
-
-    //COLOCAR OS DISCOS NA TORRE 1
-    tower01.appendChild(disc01);
-    tower01.appendChild(disc02);
-    tower01.appendChild(disc03);
-    tower01.appendChild(disc04);
+    //CHAMA A FUNÇÃO PARA CRIAR OS DISCOS E COLOCÁ-LOS NA TORRE 1
+    createDiscs();
 }
+
+//BOTÃO DE RESET
+const restart = document.getElementById('reset');
+restart.addEventListener('click', reset);
 
 //CHAMA AS FUNÇÕES PARA CRIAR AS TORRES E OS DISCOS.
 createTowers();
@@ -95,7 +93,7 @@ tower01.addEventListener("click", userClick);
 //VARIÁVEL PARA ARMAZENAR O CLIQUE DO USUÁRIO
 let clicked = false;
 
-//VARIÁVEL PARA ARMAZENAR O VALOR DO PRIMEIRO CLIQUE
+//VARIÁVEL PARA ARMAZENAR O VALOR DA TORRE DO PRIMEIRO CLIQUE
 let tower;
 
 //FUNÇÃO PARA DETERMINAR QUAL TAREFA DEVE SER REALIZADA
@@ -107,7 +105,7 @@ function userClick(e){
         putDisc(catchTower, tower);
     }
 }
-//FUNÇÃO PARA RETIRAR OS DISCOS COM HANDLER DE CLIQUE EM CADA TORRE
+//FUNÇÃO PARA SELECIONAR O DISCO A SER RETIRADO COM HANDLER DE CLIQUE EM CADA TORRE
 function moveDisc(disc) {
     const delElement = disc.lastElementChild;
 
@@ -120,9 +118,7 @@ function moveDisc(disc) {
         //delElement.remove();
         tower = disc;
         clicked = true;
-        console.log(delElement)
-        }
-        
+        }        
 }
 
 //FUNÇÃO PARA COLOCAR OS DISCOS
@@ -149,8 +145,15 @@ function putDisc(newTower, tower) {
                     alert("Largura inválida. Observe as regras.")
                 }
             } clicked = false;
-
     }
 } 
-const button = document.getElementsByTagName('button');
-//button.addEventListener("click", reset);
+
+//CONDIÇÃO DE VITÓRIA - TORRE 3 COM 4 DISCOS.   
+if (tower03.length == 4) {
+    if (confirm("Parabéns, você ganhou! Deseja jogar novamente?")) {
+            alert("Vamos lá");
+            reset();
+            } else {
+            alert("Que pena!");
+            }
+    }
