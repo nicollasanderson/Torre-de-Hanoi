@@ -15,6 +15,15 @@ body{
     align-items: center;
     margin: 0 20px;
 }
+.textoVitoria{
+    margin-top: 20px;
+    font-size: 25px;
+    color: green;
+}
+.textoInfos{
+    margin-top: 20px;
+    font-size: 25px;
+}
 .textoContador{
     font-size: 18px;
 }

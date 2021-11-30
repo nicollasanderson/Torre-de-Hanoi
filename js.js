@@ -77,6 +77,12 @@ function reset() {
     contador = 0;
     textContador.innerText = contador
     
+    //REMOVE O TEXTO DE VITÓRIA
+    let textInfos = document.getElementsByClassName('textoInfos')[0]
+    textInfos.innerText = ''
+    textInfos.style.color = "black"
+
+    //ADICIONA OS EVENT LISTINERS DEPOIS DE RESETAR
     tower02.addEventListener("click", userClick);
     tower03.addEventListener("click", userClick);
     tower01.addEventListener("click", userClick);
@@ -127,7 +133,8 @@ function moveDisc(disc) {
     
     //PRIMEIRO VERIFICA SE A TORRE TEM DISCOS
     if (disc.childElementCount == 0) {
-        alert("Selecione uma torre com discos.");}
+        let info = "Selecione uma torre com discos."
+        tempoDoTexto(info);}
 
         //TENDO DISCOS, REMOVE-SE O ÚLTIMO
         else if (disc.childElementCount > 0) {
@@ -138,6 +145,7 @@ function moveDisc(disc) {
         }        
 }
 
+let cont = 0
 //FUNÇÃO PARA COLOCAR OS DISCOS
 function putDisc(newTower, tower) {
     const delElement = tower.lastElementChild;
@@ -145,7 +153,8 @@ function putDisc(newTower, tower) {
     
     //VERIFICA SE É A MESMA TORRE
     if (newTower == tower){
-        alert("Escolha outra torre.")
+        let info = "Escolha outra torre."
+        tempoDoTexto(info)
         delElement.style.border = '2px solid red'
     } else if (newTower != tower) {
         //VERIFICA SE A TORRE DE DESTINO TEM DISCO
@@ -164,7 +173,8 @@ function putDisc(newTower, tower) {
                     contador++
                     textContador.innerText = contador
                 } else if (width > restWidth){
-                    alert("Largura inválida. Observe as regras.")
+                    let info = "Largura inválida. Observe as regras."
+                    tempoDoTexto(info)
                 }
             } clicked = false;
     }
@@ -172,12 +182,25 @@ function putDisc(newTower, tower) {
 
 //CONDIÇÃO DE VITÓRIA - TORRE 3 OU TORRE 2 COM 4 DISCOS.
 function condicaoVitoria(){
-    console.log(tower03.childElementCount)
     if (tower03.childElementCount >= 4 || tower02.childElementCount >= 4) {
-        alert("Parabéns, você ganhou!")
+        let textVitoria = document.getElementsByClassName('textoInfos')[0]
+        textVitoria.innerText = "Parabéns, você ganhou!"
+        textVitoria.style.color = "green"
         tower02.removeEventListener("click", userClick);
         tower03.removeEventListener("click", userClick);
         tower01.removeEventListener("click", userClick);
-        
     }
+}
+
+//ADICIONA UMA INFORMAÇÃO NA TELA E ESPERA 5 SEGUNDOS ANTES DE SER REMOVIDO
+function tempoDoTexto(texto){
+    let textInfos = document.getElementsByClassName('textoInfos')[0]
+    textInfos.innerText = texto
+    const tempoTexto = setInterval(function(){
+        cont++
+        if(cont>0){
+            textInfos.innerText = ''
+            clearInterval(tempoTexto)
+        }
+    },5000)
 }
