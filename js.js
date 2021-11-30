@@ -1,4 +1,5 @@
-
+//VARIÁVEL COM O NÚMERO DE DISCOS
+let numDisc;
 
 //VARIÁVEL PARA ARMAZENAR A CONTAGEM DE MOVIMENTOS
 let contador = 0;
@@ -28,30 +29,36 @@ function createTowers() {
 }
 
 //FUNÇÃO PARA CRIAR OS DISCOS
-function createDiscs(){
-        
+function createDiscs(numDisc){
+
+    const disc = [];
+    const tower01 = document.getElementById("tower01");   
+    for (i = 1; i <= numDisc; i++){
+        disc[i] = document.createElement("div");
+        disc[i].id= `disc0${i}`;
+        tower01.appendChild(disc[i]);
+    }
+
     //CRIAR OS DISCOS
-    const disc01 = document.createElement("div");
-    const disc02 = document.createElement("div");
-    const disc03 = document.createElement("div");
-    const disc04 = document.createElement("div");
+    // const disc01 = document.createElement("div");
+    // const disc02 = document.createElement("div");
+    // const disc03 = document.createElement("div");
+    // const disc04 = document.createElement("div");
 
     //ADICIONAR ID'S AOS DISCOS
-    disc01.id = "disc01";
-    disc02.id = "disc02";
-    disc03.id = "disc03";
-    disc04.id = "disc04";
+    // disc01.id = "disc01";
+    // disc02.id = "disc02";
+    // disc03.id = "disc03";
+    // disc04.id = "disc04";
 
 
     //COLOCAR OS DISCOS NA TORRE 1
-    const tower01 = document.getElementById("tower01");
-    tower01.appendChild(disc01);
-    tower01.appendChild(disc02);
-    tower01.appendChild(disc03);
-    tower01.appendChild(disc04);
+//    const tower01 = document.getElementById("tower01");
+    // tower01.appendChild(disc01);
+    // tower01.appendChild(disc02);
+    // tower01.appendChild(disc03);
+    // tower01.appendChild(disc04);
 }
-
-
 
 //FUNÇÃO PARA RESETAR O JOGO, COLOCANDO-OS NA TORRE 1.
 function reset() {
@@ -87,18 +94,39 @@ function reset() {
     tower01.addEventListener("click", userClick);
     tower02.addEventListener("click", userClick);
     tower03.addEventListener("click", userClick);
-
-    //CHAMA A FUNÇÃO PARA CRIAR OS DISCOS E COLOCÁ-LOS NA TORRE 1
-    createDiscs();
 }
 
-//BOTÃO DE RESET
-const restart = document.getElementById('reset');
-restart.addEventListener('click', reset);
+//BOTÃO FACIL
+const easy = document.getElementById('facil');
+easy.addEventListener('click', easyMode);
+
+//BOTÃO MEDIO
+const medium = document.getElementById('medio');
+medium.addEventListener('click', mediumMode);
+
+//BOTÃO DIFÍCIL
+const hard = document.getElementById('dificil');
+hard.addEventListener('click', hardMode);
+
+//FUNÇÃO FAZ O RESET E CHAMA COM O NÚMERO DE DISCOS
+function easyMode() {
+    numDisc = 3;
+    reset();
+    createDiscs(numDisc);
+}
+function mediumMode() {
+    numDisc = 4;
+    reset();
+    createDiscs(numDisc);
+}
+function hardMode() {
+    numDisc = 5;
+    reset();
+    createDiscs(numDisc);
+}
 
 //CHAMA AS FUNÇÕES PARA CRIAR AS TORRES E OS DISCOS.
 createTowers();
-createDiscs();
 
 //SELECIONA AS 3 TORRES NO DOM
 const tower01 = document.getElementById("tower01");
@@ -182,7 +210,7 @@ function putDisc(newTower, tower) {
 
 //CONDIÇÃO DE VITÓRIA - TORRE 3 OU TORRE 2 COM 4 DISCOS.
 function condicaoVitoria(){
-    if (tower03.childElementCount >= 4 || tower02.childElementCount >= 4) {
+    if (tower03.childElementCount >= numDisc || tower02.childElementCount >= numDisc) {
         let textVitoria = document.getElementsByClassName('textoInfos')[0]
         textVitoria.innerText = "Parabéns, você ganhou!"
         textVitoria.style.color = "green"
