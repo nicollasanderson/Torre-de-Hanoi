@@ -12,21 +12,24 @@
     <main id="principal">
         <section class="textoRegras">
             <p>O objetivo do quebra-cabeças é mover toda a pilha para outra vareta obedecendo às seguintes regras:</p>
-            
             <li>Apenas um disco pode ser movido por vez.</li>
-            <li>Cada movimento consiste de pegar o disco de cima de uma das pilhas e movê-lo para o topo de outra pilha.</li>
+            <li>Cada movimento consiste em pegar o disco de cima de uma das pilhas e movê-lo para o topo de outra pilha.</li>
             <li>Nenhum disco pode ser colocado no topo de um disco menor.</li>
-             
+            <p id="start">Escolha um nível e comece o jogo!</p>  
         </section>
 
-        <button id="reset">Reiniciar</button>
-        <p class="textoContador">Movimentos realizados: <strong id="contador">0</strong></p>
-        <p class="textoInfos"></p>
-        <section id = "main">   
-                  
+        <section id="ux">
+            <button id="facil">Fácil</button>
+            <button id="medio">Médio</button>
+            <button id="dificil">Difícil</button>
         </section>
         
-        
+        <p class="textoContador">Movimentos realizados: <strong id="contador">0</strong></p>
+
+        <p class="textoInfos"></p>
+
+        <section id = "main">            
+        </section>   
     </main>
     <script src="js.js"></script>
 </body>
